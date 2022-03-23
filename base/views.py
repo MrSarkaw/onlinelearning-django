@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
-
+from django.contrib.auth.forms import UserCreationForm
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
@@ -25,14 +25,24 @@ def loginPage(request):
             messages.error(request, "user not found, if you not register yet, regitster!")
         
         user = authenticate(request,username=username, password=password)
-        print(user)
         if user is not None:
             login(request, user)
             return redirect('home')
         else:
             messages.error(request, 'username or email is wrong')
 
-    return render(request,'base/login_register.html')
+    return render(request,'base/login_register.html', {'name':'login'})
+
+def registerPage(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request,'an error accured, tryagain')
+    return render(request, 'base/login_register.html',{'form':UserCreationForm()})
 
 def room(request, id):
     room = Room.objects.get(id = int(id))
