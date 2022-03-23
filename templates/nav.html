@@ -1,0 +1,14 @@
+<div class="flex items-center justify-between">
+    <a href="/">Home</a>
+    {% if not request.user.is_authenticated %}
+     <a href="{% url 'loginPage' %}">Login</a>
+    {% else %}
+     <a href="{% url 'logoutPage' %}">Logout</a>
+    {% endif %}
+</div>
+
+<form method="GET">
+
+    <input type="text" name="q"> <button>search</button>
+</form>
+<hr>

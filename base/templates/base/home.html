@@ -1,0 +1,35 @@
+{% extends "main.html" %}
+
+{% block content  %}
+
+    <div class="flex flex-wrap">
+        <div class="w-2/12">
+            {% for i in topic %}
+                
+               <p>
+                   <a href="{% url 'home' %}?q={{ i.name }}" class="text-xl hover:text-blue-500">{{ i }}</a>
+               </p> 
+
+            {% endfor %}
+        </div>
+        <div class="w-10/12 text-xl">
+            <h1><a class="text-blue-500" href="{% url 'roomCreate' %}">create</a></h1>
+            
+            {% for i in content %}
+        
+                <h3>
+                    <p> {{ i.host.username }} </p> 
+                    <p>
+                        <a class="text-blue-500" href="{% url 'updateRoom' i.id %}">Edit</a>
+                        <a class="text-red-500" href="{% url 'deleteRoom' i.id %}">Delete</a>
+                    </p>
+                    <a href="{% url 'room' i.id %}">{{ i.id }} --- {{ i.name }}</a>
+                    <p>{{ i.topic.name }}</p>
+                </h3>
+                <hr>
+        
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

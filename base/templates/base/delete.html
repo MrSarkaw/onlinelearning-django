@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <p>are you sure to delete this data: {{ obj }}</p>
+        <input type="submit">
+    </form>
+{% endblock %} 
