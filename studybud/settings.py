@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'onlinelearning.urls'
+ROOT_URLCONF = 'studybud.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'onlinelearning.wsgi.application'
+WSGI_APPLICATION = 'studybud.wsgi.application'
 
 
 # Database

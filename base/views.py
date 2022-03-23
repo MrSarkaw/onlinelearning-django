@@ -3,7 +3,6 @@ from .models import Room, Topic
 from .forms import RoomForm
 from django.contrib import messages
 from django.db.models import Q
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 
@@ -22,32 +21,18 @@ def loginPage(request):
         password = request.POST.get('password')
         try:
             user = User.objects.get(username = username)
-
-            user = authenticate(request,username=username, password=password)
-            print(user)
-            if user is not None:
-                login(request, user)
-                return redirect('home')
-            else:
-                messages.error(request, 'username or email is wrong')
         except:
             messages.error(request, "user not found, if you not register yet, regitster!")
         
-
-    return render(request,'base/login_register.html',{"name":'login'})
-
-def registerPage(request):
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            print('hello')
-            user = form.save()
+        user = authenticate(request,username=username, password=password)
+        print(user)
+        if user is not None:
             login(request, user)
             return redirect('home')
+        else:
+            messages.error(request, 'username or email is wrong')
 
-    return render(request, 'base/login_register.html',{'form':UserCreationForm})
-
-
+    return render(request,'base/login_register.html')
 
 def room(request, id):
     room = Room.objects.get(id = int(id))
