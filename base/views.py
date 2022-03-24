@@ -57,6 +57,7 @@ def room(request, id):
                 room = room,
                 body = request.POST.get('body')
             )
+            room.particpanties.add(request.user)
             return redirect('room',id=room.id)
     return render(request, 'base/room.html',{"room":room,'room_messages':message, 'particpanties':particpanties})
 
