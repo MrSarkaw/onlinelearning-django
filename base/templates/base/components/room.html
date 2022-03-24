@@ -1,0 +1,14 @@
+{% for i in content %}
+        
+<h3>
+    <p> <a href="{% url 'profile' i.host.id %}"> {{ i.host.username }}</a>  </p> 
+    <p>
+        <a class="text-blue-500" href="{% url 'updateRoom' i.id %}">Edit</a>
+        <a class="text-red-500" href="{% url 'deleteRoom' i.id %}">Delete</a>
+    </p>
+    <a href="{% url 'room' i.id %}">{{ i.id }} --- {{ i.name }}</a>
+    <p>{{ i.topic.name }}</p>
+</h3>
+<hr>
+
+{% endfor %}

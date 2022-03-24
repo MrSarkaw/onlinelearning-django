@@ -104,3 +104,10 @@ def deleteRoom(request, pk):
         room.delete()
         return redirect("home")
     return render(request,'base/delete.html',{'obj': room})
+
+
+def profile(request, id):
+    user = User.objects.get(id = id)
+    activity = user.message_set.all()
+    room = user.room_set.all()
+    return render(request,'base/profile.html',{'user':user, 'content':room, 'activity':activity})
