@@ -50,6 +50,7 @@ def room(request, id):
     room = Room.objects.get(id = int(id))
     message = room.message_set.all()
     particpanties = room.particpanties.all()
+    topic = Topic.objects.all()
 
     if request.user.is_authenticated:
         if request.method == "POST":
@@ -60,7 +61,7 @@ def room(request, id):
             )
             room.particpanties.add(request.user)
             return redirect('room',id=room.id)
-    return render(request, 'base/room.html',{"room":room,'room_messages':message, 'particpanties':particpanties})
+    return render(request, 'base/room.html',{"room":room,'room_messages':message, 'particpanties':particpanties,'topic':topic})
 
 @login_required(login_url="loginPage")
 def deleteMessage(request, pk):
