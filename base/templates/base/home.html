@@ -1,18 +1,11 @@
 {% extends "main.html" %}
 
 {% block content  %}
-
     <div class="flex flex-wrap">
         <div class="w-2/12">
-            {% for i in topic %}
-                
-               <p>
-                   <a href="{% url 'home' %}?q={{ i.name }}" class="text-xl hover:text-blue-500">{{ i }}</a>
-               </p> 
-
-            {% endfor %}
+           {% include 'base/components/topic.html'  %}
         </div>
-        <div class="w-10/12 text-xl">
+        <div class="w-8/12 text-xl">
             <h1><a class="text-blue-500" href="{% url 'roomCreate' %}">create</a></h1>
             
             {% for i in content %}
@@ -30,6 +23,10 @@
         
             {% endfor %}
         </div>
+        <div class="w-2/12">
+            <p class="text-xl">Recent activity:</p>
+            {% include 'base/components/message.html'  %}
+         </div>
     </div>
 
 {% endblock %}

@@ -13,8 +13,9 @@ def home(request):
 
     rooms = Room.objects.filter(Q(topic__name__icontains = q) | Q(name__icontains = q))
     topic = Topic.objects.all()
+    activity = Message.objects.all()
 
-    return render(request, 'base/home.html', {'content':rooms, 'topic':topic})
+    return render(request, 'base/home.html', {'content':rooms, 'topic':topic, 'activity':activity})
 
 def loginPage(request):
     if request.method == "POST":

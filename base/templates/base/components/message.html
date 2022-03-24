@@ -1,0 +1,14 @@
+{% for message in activity %}
+
+<div class="p-2 mt-2 bg-gray-500 text-white">
+    {% if message.user == request.user %}
+    <p>
+        <a href="{% url 'deleteMessage' message.id %}">delete</a>
+    </p>
+    {% endif %}
+    {{ message.user }} -- {{ message.create_at|timesince }}
+    <p>the message to: {{ message.room }}</p>
+    <p>message: {{ message }}</p>
+</div>
+
+{% endfor %}
