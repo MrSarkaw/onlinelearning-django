@@ -1,30 +1,43 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    room detail: {{ room.name }} 
-    <p>{{ room.description }} </p> 
-    <p class="text-xl">{{ room.host }} - - - {{ room.create_at|timesince }}</p>
 
-    <div class="bg-gray-800 text-white p-2 rounded">
-        {% for message in room_messages %}
-           <div class="my-3">
-                {% if message.user == request.user %}
-                <p>
-                    <a href="{% url 'deleteMessage' message.id %}">delete</a>
-                </p>
-                {% endif %}
-                {{ message.user }}  -- {{ message.create_at|timesince }}
-                <p class="text-xl">{{ message.body }}</p>
+    <div class="flex flex-wrap">
+      
+        <div class="w-9/12">
+            room detail: {{ room.name }} 
+            <p>{{ room.description }} </p> 
+            <p class="text-xl">{{ room.host }} - - - {{ room.create_at|timesince }}</p>
+        
+            <div class="bg-gray-800 text-white p-2 rounded">
+                {% for message in room_messages %}
+                   <div class="my-3">
+                        {% if message.user == request.user %}
+                        <p>
+                            <a href="{% url 'deleteMessage' message.id %}">delete</a>
+                        </p>
+                        {% endif %}
+                        {{ message.user }}  -- {{ message.create_at|timesince }}
+                        <p class="text-xl">{{ message.body }}</p>
+                    </div>
+                    <hr class="bg-white">
+                {% endfor %}
             </div>
-            <hr class="bg-white">
-        {% endfor %}
+        
+            {% if request.user.is_authenticated %}
+                <form method="post" class="mt-2">
+                    {% csrf_token %}
+                    <input type="text" class="p-2 bg-gray-200" name="body">
+                    <button>submit</button>
+                </form>
+            {% endif %}
+        </div>
+        <div class="w-3/12">
+            <p class="text-xl">Paticpanties:</p>
+            <hr>
+            {% for particpant in particpanties %}
+                <p>{{ particpant.user }}</p>
+            {% endfor %}
+        </div>
     </div>
-
-    {% if request.user.is_authenticated %}
-        <form method="post" class="mt-2">
-            {% csrf_token %}
-            <input type="text" class="p-2 bg-gray-200" name="body">
-            <button>submit</button>
-        </form>
-    {% endif %}
 {% endblock %} 
