@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Room, Topic
+from .models import Room, Topic, Message
 from .forms import RoomForm
 from django.contrib import messages
 from django.db.models import Q
@@ -47,8 +47,24 @@ def registerPage(request):
 
 def room(request, id):
     room = Room.objects.get(id = int(id))
-    
-    return render(request, 'base/room.html',{"room":room})
+    message = room.message_set.all()
+
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            Message.objects.create(
+                user = request.user,
+                room = room,
+                body = request.POST.get('body')
+            )
+            return redirect('room',id=room.id)
+    return render(request, 'base/room.html',{"room":room,'room_messages':message})
+
+@login_required(login_url="loginPage")
+def deleteMessage(request, pk):
+    message = Message.objects.get(id=pk)
+    if message.user == request.user:
+        message.delete()
+        return redirect('home')
 
 @login_required(login_url='loginPage')
 def logoutPage(request):
