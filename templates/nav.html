@@ -1,14 +1,23 @@
-<div class="flex items-center justify-between">
-    <a href="/">Home</a>
-    {% if not request.user.is_authenticated %}
-     <a href="{% url 'loginPage' %}">Login</a>
-    {% else %}
-     <a href="{% url 'logoutPage' %}">Logout</a>
-    {% endif %}
+<div class="mainColor py-5">
+    <div class="flex flex-wrap items-center text-white font-bold justify-between w-10/12 mx-auto">
+        <div class="space-x-20 w-8/12 flex items-center">
+            <a href="/" class="text-2xl">OnlineLearning</a>
+            <div class="py-3 px-2 w-5/12 searchColor rounded space-x-3 flex items-center">
+                <form method="get" class="w-full">
+                    <i class="fas fa-search"></i>  
+                    <input type="text" class="bg-transparent w-10/12 focus:outline-none" placeholder="search" name="q" id="">
+                </form>
+            </div>
+        </div>
+        <div>
+            {% if not request.user.is_authenticated %}
+            <a href="{% url 'loginPage' %}"> <i class="fas fa-user"></i> Login</a>
+           {% else %}
+            <a  href="{% url 'logoutPage' %}" class="flex items-center space-x-3">
+                <img style="background-image:url('https://st.depositphotos.com/1371851/1256/i/600/depositphotos_12560182-stock-photo-handsome-man-with-eyeglasses.jpg')" class="w-10 h-10 coverImg rounded-full" alt="">
+                <p class="text-sm">Sarkaw salar</p>
+            </a>
+           {% endif %}
+        </div>
+    </div>
 </div>
-
-<form method="GET">
-
-    <input type="text" name="q"> <button>search</button>
-</form>
-<hr>
