@@ -1,7 +1,19 @@
-{% for i in topic %}
-                
-<p>
-    <a href="{% url 'home' %}?q={{ i.name }}" class="text-xl hover:text-blue-500">{{ i }}</a>
-</p> 
+<p class=" mainColorText uppercase ">browse topics</p>
+<div class="grid gap-y-8 text-white mt-5">
+    <a  href="{% url 'home' %}" class="flex items-center justify-between">
+        <p>All</p>
+        <div class="mainColor px-3 py-1 rounded">
+            {{ topic.count }}
+        </div>
+    </a>
+    {% for i in topic %}
+    <a  href="{% url 'home' %}?q={{ i.name }}" class="flex items-center justify-between">
+        <p>{{ i }}</p>
+        <div class="mainColor px-3 py-1 rounded">
+            {{ i.room_set.all.count }}
+        </div>
+    </a>
+    {% endfor %}
 
-{% endfor %}
+ 
+</div>

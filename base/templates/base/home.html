@@ -1,16 +1,16 @@
 {% extends "main.html" %}
 
 {% block content  %}
-    <div class="flex flex-wrap">
+<div class="w-10/12 mx-auto mt-4 flex justify-between flex-wrap">
         <div class="w-2/12">
            {% include 'base/components/topic.html'  %}
         </div>
-        <div class="w-8/12 text-xl">
+        <div class="w-7/12 text-xl">
             <h1><a class="text-blue-500" href="{% url 'roomCreate' %}">create</a></h1>
             
             {% include 'base/components/room.html' %}
         </div>
-        <div class="w-2/12">
+        <div class="w-3/12">
             <p class="text-xl">Recent activity:</p>
             {% include 'base/components/message.html'  %}
          </div>
