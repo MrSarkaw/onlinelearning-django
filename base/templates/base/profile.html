@@ -1,17 +1,29 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<div class="flex flex-wrap">
-    <div class="w-8/12 text-xl">
-        <p class="text-2xl font-bold">@{{ user }}</p>
-    
-        {% include 'base/components/room.html' %}
-
-    
-    </div>
-    <div class="w-2/12">
-        <p class="text-xl">Recent activity:</p>
-        {% include 'base/components/message.html'  %}
+<div class="flex flex-wrap mt-4 w-10/12 mx-auto">
+     <div class="w-2/12 ">
+        {% include 'base/components/topic.html'  %}
      </div>
+     <div class="w-7/12 pl-5 text-xl">
+        <div class="text-center text-white">
+            <img style="background-image:url('https://st.depositphotos.com/1371851/1256/i/600/depositphotos_12560182-stock-photo-handsome-man-with-eyeglasses.jpg')" class="w-20 h-20 mx-auto coverImg rounded-full" alt="">
+            <p class="text-2xl mt-2">{{ user.fullname }}</p>
+            <p class=" mt-2">@{{ user.username }}</p>
+
+            <button class="px-4 border-2 border-cyan-500 text-cyan-500 rounded-full py-1 mt-2">Edit Profile</button>
+        </div>
+        <div class="mt-10">
+            <p class="text-sm mainColorText uppercase">ABOUT</p>
+            <p class="text-white text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur illo tenetur facilis sunt nemo debitis quisquam hic atque aut? Ducimus alias placeat optio accusamus repudiandae quis ab ex exercitationem rem?</p>
+        </div>
+        <div class="mt-4">
+            <p class="text-sm mainColorText uppercase">STUDY ROOMS HOSTED BY Sarkaw salar</p>
+        </div>
+         {% include 'base/components/room.html' %}
+     </div>
+     <div class="w-3/12 pl-5">
+         {% include 'base/components/message.html'  %}
+      </div>
 </div>
 {% endblock content %}

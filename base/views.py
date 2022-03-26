@@ -115,4 +115,5 @@ def profile(request, id):
     user = User.objects.get(id = id)
     activity = user.message_set.all()
     room = user.room_set.all()
-    return render(request,'base/profile.html',{'user':user, 'content':room, 'activity':activity})
+    topic = Topic.objects.all()
+    return render(request,'base/profile.html',{'user':user, 'content':room, 'activity':activity, 'topic':topic})
