@@ -1,45 +1,106 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
-    <div class="flex flex-wrap">
-        <div class="w-2/12">
-            {% include 'base/components/topic.html'  %}
-         </div>
-        <div class="w-8/12">
-            room detail: {{ room.name }} 
-            <p>{{ room.description }} </p> 
-            <p class="text-xl">{{ room.host }} - - - {{ room.create_at|timesince }}</p>
-        
-            <div class="bg-gray-800 text-white p-2 rounded">
-                {% for message in room_messages %}
-                   <div class="my-3">
-                        {% if message.user == request.user %}
-                        <p>
-                            <a href="{% url 'deleteMessage' message.id %}">delete</a>
-                        </p>
-                        {% endif %}
-                        {{ message.user }}  -- {{ message.create_at|timesince }}
-                        <p class="text-xl">{{ message.body }}</p>
+    <div class="w-10/12 mx-auto">
+        <div class=" flex space-x-5">
+            <div class="w-9/12 rounded-lg text-white mainColor overflow-hidden">
+                <div class="p-4 uppercase boxColor font-bold flex justify-between items-center">
+                    <div>
+                        <button  onclick="window.history.back()" class="focus:outline-none"><i class="fas fa-arrow-left"></i></button> STUDY ROOM
                     </div>
-                    <hr class="bg-white">
-                {% endfor %}
+                    <div class="space-x-4">
+                        {% if request.user == room.host %}
+                            <a href="{% url 'updateRoom' room.id %}" class="focus:outline-none"><i class="fas fa-pen"></i></a>
+                            <a href="{% url 'deleteRoom' room.id %}" class="focus:outline-none"><i class="fas fa-times"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="py-10 px-5 ">
+                    <div class="flex items-center justify-between ">
+                        <p class="text-cyan-500 text-2xl">{{ room.name }}</p>
+                        <p class="text-sm text-gray-100/30">{{ room.create_at|timesince }}</p>
+                    </div>
+                    <p class="uppercase mt-2 text-xs text-gray-100/30">hosted by</p>
+                    <div class="flex items-center space-x-3 mt-2">
+                        <img style="background-image:url('https://st.depositphotos.com/1371851/1256/i/600/depositphotos_12560182-stock-photo-handsome-man-with-eyeglasses.jpg')" class="w-8 h-8 coverImg rounded-full" alt="">
+                        <div class="text-lg">
+                            <p class="text-cyan-500">
+                               {{ room.host.username }}
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-gray-100/40 my-3">
+                        {{ room.description }}
+                    </p>
+                    <span class="bg-gray-500 px-4 rounded-full py-1">
+                        {{ room.topic.name }}
+                    </span>
+
+                    <div class="color p-2 rounded mt-4 h-72 overflow-y-scroll grid gap-y-5">
+                    
+                        {% for message in room_messages %}
+                            <div class="p-3 border-l-2 border-gray-100/30">
+                                <div class="flex justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <img style="background-image:url('https://st.depositphotos.com/1371851/1256/i/600/depositphotos_12560182-stock-photo-handsome-man-with-eyeglasses.jpg')" class="w-8 h-8 coverImg rounded-full" alt="">
+                                        <div class="text-lg">
+                                            <p class="text-cyan-500">
+                                                {{ message.user }}
+                                            </p>
+                                        </div>
+                                        <p class="text-xs">{{ message.create_at|timesince }}</p>
+                                    </div>
+                                    <div>
+                                        {% if message.user == request.user %}
+                                            <a href="{% url 'deleteMessage' message.id %}" class="focus:outline-none"><i class="fas fa-times"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <p class="text-gray-100/40 text-sm my-3">
+                                    {{ message.body }}
+                                </p>
+                            </div>
+                        {% endfor %}
+                    
+                    </div>
+                    {% if request.user.is_authenticated %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="text" class="py-2 px-2 focus:outline-none color w-full rounded mt-3" placeholder="write message" name="body" id="">
+                    </form>
+                     {% endif %}
+
+                </div>
             </div>
-        
-            {% if request.user.is_authenticated %}
-                <form method="post" class="mt-2">
-                    {% csrf_token %}
-                    <input type="text" class="p-2 bg-gray-200" name="body">
-                    <button>submit</button>
-                </form>
-            {% endif %}
-        </div>
-        <div class="w-2/12">
-            <p class="text-xl">Paticpanties:</p>
-            <hr>
-            {% for user in particpanties %}
-                <p>{{ user.username }}</p>
-            {% endfor %}
+            <div class="w-3/12">
+                <div class="rounded overflow-hidden text-white">
+                    <div class="p-4 uppercase boxColor font-bold">
+                        PARTICIPANTS <span class="text-cyan-400 text-xs">({{ room.particpanties.all.count }} Joined)</span>
+                    </div>
+                    <div class="mainColor p-2 h-screen overflow-y-scroll">
+                        <div class="p-2">
+                            {% for user in particpanties %}
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="flex items-center space-x-3">
+                                            <img style="background-image:url('https://st.depositphotos.com/1371851/1256/i/600/depositphotos_12560182-stock-photo-handsome-man-with-eyeglasses.jpg')" class="w-10 h-10 coverImg rounded-full" alt="">
+                                            <div class="text-sm">
+                                                <p class="text-sm">
+                                                    {{ user.fullname }}
+                                                </p>
+                                                <a href="{% url 'profile' user.id %}" class=" text-cyan-500">
+                                                    @{{ user.username }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                           
+                        </div> 
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %} 

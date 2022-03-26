@@ -30,10 +30,7 @@
                     </p>
                 </div>
                 <div class=" flex space-x-2">
-                    {% if request.user == i.host %}
-                        <a class="bg-blue-500  px-4  py-1 rounded-full" href="{% url 'updateRoom' i.id %}">Edit</a>
-                        <a class="bg-red-500  px-4  py-1 rounded-full" href="{% url 'deleteRoom' i.id %}">Delete</a> 
-                    {% endif %}
+                 
                     <p class="bg-gray-500 px-4 rounded-full py-1">
                         {{ i.topic.name }}
                     </p>
