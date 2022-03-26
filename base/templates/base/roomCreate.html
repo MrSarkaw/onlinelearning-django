@@ -18,7 +18,7 @@
                     </div>
                     <div class="mt-5">
                         Topic
-                        <input type="text" name="topic" list="topic" class="bg-transparent p-2 w-full  focus:outline-none rounded border border-gray-100/20">
+                        <input type="text" value="{{ room.topic.name }}" name="topic" list="topic" class="bg-transparent p-2 w-full  focus:outline-none rounded border border-gray-100/20">
                         <datalist id="topic">
                             <select>
                                 {% for i in topic %}

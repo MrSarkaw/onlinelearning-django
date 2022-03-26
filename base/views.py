@@ -81,7 +81,7 @@ def roomCreate(request):
             description = request.POST.get('description'),
         )
         return redirect("home")
-        
+
     topic = Topic.objects.all()
     return render(request,'base/roomCreate.html',{'form': RoomForm, 'topic':topic})
 
@@ -91,11 +91,15 @@ def roomUpdate(request,pk):
     form = RoomForm(instance=room)
 
     if request.method == 'POST':
-        form = RoomForm(request.POST, instance=room)
-        if form.is_valid():
-            form.save()
+        if room.host == request.user:
+            topic,create = Topic.objects.get_or_create(name=request.POST.get('topic'))
+            room.name =request.POST.get('name')
+            room.description =request.POST.get('description')
+            room.topic =topic
+            room.save()
             return redirect('home')
-    return render(request,'base/roomCreate.html',{'form': form})
+    topic = Topic.objects.all()
+    return render(request,'base/roomCreate.html',{'form': form,'topic':topic,'room':room})
 
 @login_required(login_url='loginPage')
 def deleteRoom(request, pk):
