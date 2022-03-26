@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+
+html, body{
+  background-color: #2d2d39;
+}
+.color{
+  background-color: #2d2d39;
+}
+.bodyColor{
+  background-color: #2d2d39;
+}
+.mainColor{
+  background-color: #3f4156;
+}
+.boxColor{
+  background-color: #787cb8;
+}
+
+.mainColorText{
+  color: #696d97;
+}
+.searchColor{
+  background-color: #696d975e;
+}
+.coverImg{
+  background-position: center;
+  background-size: cover;
+}
