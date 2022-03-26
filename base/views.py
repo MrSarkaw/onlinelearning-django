@@ -73,11 +73,17 @@ def logoutPage(request):
 @login_required(login_url='loginPage')
 def roomCreate(request):
     if request.method == "POST":
-        form = RoomForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("home")
-    return render(request,'base/roomCreate.html',{'form': RoomForm})
+        topic, create = Topic.objects.get_or_create(name=request.POST.get('topic'))
+        Room.objects.create(
+            host = request.user,
+            topic = topic,
+            name = request.POST.get('name'),
+            description = request.POST.get('description'),
+        )
+        return redirect("home")
+        
+    topic = Topic.objects.all()
+    return render(request,'base/roomCreate.html',{'form': RoomForm, 'topic':topic})
 
 @login_required(login_url='loginPage')
 def roomUpdate(request,pk):
