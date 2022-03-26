@@ -2,15 +2,22 @@
 
 {% block content  %}
 <div class="w-10/12 mx-auto mt-4 flex justify-between flex-wrap">
-        <div class="w-2/12">
+        <div class="w-2/12 ">
            {% include 'base/components/topic.html'  %}
         </div>
-        <div class="w-7/12 text-xl">
-            <h1><a class="text-blue-500" href="{% url 'roomCreate' %}">create</a></h1>
-            
+        <div class="w-7/12 pl-5 text-xl">
+            <div class="flex items-center justify-between">
+                <div class="font-bold">
+                    <p class="uppercase text-white">study room</p> 
+                    <span class="text-sm mainColorText">{{ content.count }} Rooms available</span>
+                </div>
+                <div>
+                    <a href="{% url 'roomCreate' %}" class="bg-cyan-500 px-4 py-2 rounded text-gray-700"><i class="fas fa-plus"></i> Create Room</a>
+                </div>
+            </div>
             {% include 'base/components/room.html' %}
         </div>
-        <div class="w-3/12">
+        <div class="w-3/12 pl-5">
             {% include 'base/components/message.html'  %}
          </div>
     </div>

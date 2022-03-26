@@ -1,14 +1,41 @@
-{% for i in content %}
-        
-<h3>
-    <p> <a href="{% url 'profile' i.host.id %}"> {{ i.host.username }}</a>  </p> 
-    <p>
-        <a class="text-blue-500" href="{% url 'updateRoom' i.id %}">Edit</a>
-        <a class="text-red-500" href="{% url 'deleteRoom' i.id %}">Delete</a>
-    </p>
-    <a href="{% url 'room' i.id %}">{{ i.id }} --- {{ i.name }}</a>
-    <p>{{ i.topic.name }}</p>
-</h3>
-<hr>
+<div class="grid gap-y-10 text-white mt-5">
+    {% for i in content %}
+        <div class="rounded-xl mainColor p-3">
+            <div class="flex text-gray-100/70 items-center justify-between">
+                <div>
+                    <div class="flex items-center space-x-3">
+                        <img style="background-image:url('https://st.depositphotos.com/1371851/1256/i/600/depositphotos_12560182-stock-photo-handsome-man-with-eyeglasses.jpg')" class="w-8 h-8 coverImg rounded-full" alt="">
+                        <div class="text-sm">
+                            <p>
+                                {{ i.host.username }}
+                            </p>
+                        
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-xs">
+                       {{i.create_at|timesince}}
+                    </p>
+                </div>
+            </div>
+            <a class="text-xl mt-4" href="{% url 'room' i.id %}">{{ i.name }}</a>
+            <p class=" text-gray-100/70 mt-5 text-sm pb-5 border-b border-gray-100/30">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. At quo dolores voluptatem animi quia nisi. Eligendi, impedit fugiat architecto similique, laborum animi quas commodi repudiandae ad explicabo nostrum, error omnis!
+            </p>
+            <div class="flex mt-4 text-sm text-gray-100/70 items-center justify-between">
+                <div>
+                    <p>
+                        <i class="fas fa-users"></i> {{ i.particpanties.all.count }} joiend
+                    </p>
+                </div>
+                <div>
+                    <p class="bg-gray-500 px-4 rounded-full py-1">
+                        {{ i.topic.name }}
+                    </p>
+                </div>
+            </div>
 
-{% endfor %}
+        </div>
+    {% endfor %}
+</div>
