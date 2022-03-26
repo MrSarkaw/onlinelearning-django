@@ -27,7 +27,7 @@
                          {% endif %}
                     </div>
                 </div>
-                <p class="text-sm mt-4 text-gray-100/50">replaied to post <a href="{% url 'room' message.room.id %}">"{{ message.room }}"</a></p>
+                <p class="text-sm mt-4 text-gray-100/50">replaied to post <a class="text-cyan-400" href="{% url 'room' message.room.id %}">"{{ message.room }}"</a></p>
                 <div class="bodyColor mt-1 text-gray-100/70 rounded p-2 text-xs">
                     {{ message }}
                 </div>

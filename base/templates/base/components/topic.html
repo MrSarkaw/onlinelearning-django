@@ -7,7 +7,7 @@
         </div>
     </a>
     {% for i in topic %}
-    <a  href="{% url 'home' %}?q={{ i.name }}" class="flex items-center justify-between">
+    <a  href="{% url 'home' %}?q={{ i.name }}" class="flex items-center hover:text-cyan-400 justify-between">
         <p>{{ i }}</p>
         <div class="mainColor px-3 py-1 rounded">
             {{ i.room_set.all.count }}
