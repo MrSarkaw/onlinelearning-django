@@ -14,11 +14,13 @@
 <body>
     {% include 'nav.html' %}
 
-    {% if messages %}
-        {% for i in messages %}
-            <p>{{ i }}</p>
-        {% endfor %}
-    {% endif %}
+    <div class="w-4/12 mt-2 mx-auto">
+        {% if messages %}
+            {% for i in messages %}
+                <p class="bg-red-500 py-1 text-center text-white rounded">{{ i }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
 
     {% block content %}
 
