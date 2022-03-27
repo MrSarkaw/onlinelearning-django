@@ -1,9 +1,18 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <form method="post">
+    <form method="post" class="h-screen flex items-center justify-center">
         {% csrf_token %}
-        <p>are you sure to delete this data: {{ obj }}</p>
-        <input type="submit">
+        
+        <div class="w-5/12 h-72 rounded-lg text-white mainColor overflow-hidden">
+            <div class="p-4  uppercase boxColor font-bold text-white">
+              <button class="focus:outline-none" onclick="window.history.back()"><i class="fas fa-arrow-left"></i></button>  back
+            </div>
+            <div class="mt-5 px-10">
+                
+                <p class="text-gray-100/30">are you sure to delete this data: {{ obj }}?</p>
+                <input class="bg-cyan-600 mt-3 px-3 text-gray-900 py-2 rounded cursor-pointer" value="Confirm" type="submit">
+            </div>
+        </div>
     </form>
 {% endblock %} 
