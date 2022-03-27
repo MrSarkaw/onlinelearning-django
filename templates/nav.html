@@ -9,15 +9,26 @@
                 </form>
             </div>
         </div>
-        <div>
+        <div class="relative">
             {% if not request.user.is_authenticated %}
             <a href="{% url 'loginPage' %}"> <i class="fas fa-user"></i> Login</a>
            {% else %}
-            <a  href="{% url 'logoutPage' %}" class="flex items-center space-x-3">
+            <button onclick="modalFun()" class="flex focus:outline-none font-bold items-center space-x-3">
                 <img style="background-image:url('https://st.depositphotos.com/1371851/1256/i/600/depositphotos_12560182-stock-photo-handsome-man-with-eyeglasses.jpg')" class="w-10 h-10 coverImg rounded-full" alt="">
                 <p class="text-sm">Sarkaw salar</p>
-            </a>
+            </button>
+            <div class="w-40 hidden absolute top-14 p-2 rounded text-center grid gap-y-3 color text-xs border" id="modal">
+
+                <a href="{% url 'profile' request.user.id %}" >Settings</a>
+                <a href="{% url 'logoutPage' %}" >logout</a>
+            </div>
            {% endif %}
         </div>
     </div>
+
+    <script>
+        let modalFun = ()=>{
+            document.getElementById('modal').classList.toggle('hidden')
+        };
+    </script>
 </div>
