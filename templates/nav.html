@@ -17,7 +17,7 @@
                 <img style="background-image:url('https://st.depositphotos.com/1371851/1256/i/600/depositphotos_12560182-stock-photo-handsome-man-with-eyeglasses.jpg')" class="w-10 h-10 coverImg rounded-full" alt="">
                 <p class="text-sm">Sarkaw salar</p>
             </button>
-            <div class="w-40 hidden absolute top-14 p-2 rounded text-center grid gap-y-3 color text-xs border" id="modal">
+            <div class="w-40 py-5 shadow-xl hidden absolute top-14 p-2 rounded text-center grid gap-y-3 color text-xs" id="modal">
 
                 <a href="{% url 'profile' request.user.id %}" >Settings</a>
                 <a href="{% url 'logoutPage' %}" >logout</a>
