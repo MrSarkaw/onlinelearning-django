@@ -1,0 +1,31 @@
+{% extends "main.html" %}
+{% block content  %}
+{% load widget_tweaks %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="h-screen flex items-center justify-center">
+            <div class="w-4/12 rounded-lg text-white mainColor overflow-hidden">
+                <div class="p-4 text-center uppercase boxColor font-bold text-white">
+                   Edit Profile {{ request.user }}
+                </div>
+                <div class="py-5 px-5">
+                    <div>
+                        <p>Username</p>
+                        {% render_field form.username class+="bg-transparent p-2 w-full  focus:outline-none rounded border border-gray-100/20" %}
+                    </div>
+                
+                    <div class="mt-4">
+                        <p>Email</p>
+                        {% render_field form.email class='bg-transparent p-2 w-full  focus:outline-none rounded border border-gray-100/20' %}
+                    </div>
+    
+                    <div class="mt-10">
+                        <button  class="bg-cyan-500 py-2 px-4 rounded text-gray-700"> Update</button>
+                    </div>
+    
+                  
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock content %}

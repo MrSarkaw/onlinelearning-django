@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from .models import Room, Topic, Message
-from .forms import RoomForm
+from .forms import RoomForm,UserForm
 from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.models import User
@@ -117,3 +117,18 @@ def profile(request, id):
     room = user.room_set.all()
     topic = Topic.objects.all()
     return render(request,'base/profile.html',{'user':user, 'content':room, 'activity':activity, 'topic':topic})
+
+
+def profileEdit(request):
+    user = request.user
+    form = UserForm(instance=user)
+
+    if request.method == "POST":
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            print(12)
+            form.save()
+            return redirect('profile', id=request.user.id)
+
+    return render(request, 'base/editprofile.html', {"form":form})
+

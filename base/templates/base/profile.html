@@ -9,9 +9,9 @@
         <div class="text-center text-white">
             <img style="background-image:url('https://st.depositphotos.com/1371851/1256/i/600/depositphotos_12560182-stock-photo-handsome-man-with-eyeglasses.jpg')" class="w-20 h-20 mx-auto coverImg rounded-full" alt="">
             <p class="text-2xl mt-2">{{ user.fullname }}</p>
-            <p class=" mt-2">@{{ user.username }}</p>
+            <p class=" my-2">@{{ user.username }}</p>
             {% if user.id == request.user.id %}
-                <button class="px-4 border-2 border-cyan-500 text-cyan-500 rounded-full py-1 mt-2">Edit Profile</button>
+                <a href="{% url 'profileEdit' %}" class="px-4 border-2 border-cyan-500 text-cyan-500 rounded-full py-1 ">Edit Profile</a>
             {% endif %}
         </div>
         <div class="mt-10">
