@@ -1,9 +1,8 @@
 from django.shortcuts import redirect, render
-from .models import Room, Topic, Message
+from .models import Room, Topic, Message, User
 from .forms import RoomForm,UserForm
 from django.contrib import messages
 from django.db.models import Q
-from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
