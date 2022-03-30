@@ -1,6 +1,7 @@
 {% extends "main.html" %}
 
 {% block content  %}
+{% load widget_tweaks  %}
     {% if name == 'login' %}
     <form method="post">
         {% csrf_token %}
@@ -38,10 +39,55 @@
     {% else %}
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button class="mt-3">register</button>
-        <br>
-        <a href="{% url 'loginPage' %}">login</a>
+        <div class="w-4/12 mx-auto rounded-lg text-white mainColor overflow-hidden">
+            <div class="p-4 text-center uppercase boxColor font-bold text-white">
+               Register
+            </div>
+            <div class="py-5 px-5">
+                <p class="text-center mb-4">Find your study partner</p>
+              
+                
+                <div class="mt-5">
+                    <p>name</p>
+                    {% render_field form.name   class='bg-transparent p-2 w-full  focus:outline-none rounded border border-gray-100/20' %} 
+                </div>
+                
+                <div class="mt-5">
+                    <p>Username</p>
+                    {% render_field form.username   class='bg-transparent p-2 w-full  focus:outline-none rounded border border-gray-100/20' %} 
+                </div>
+                
+                
+                <div class="mt-5">
+                    <p>bio</p>
+                    {% render_field form.bio   class='bg-transparent p-2 w-full  focus:outline-none rounded border border-gray-100/20' %} 
+                </div>
+                
+                
+                <div class="mt-5">
+                    <p>email</p>
+                    {% render_field form.email   class='bg-transparent p-2 w-full  focus:outline-none rounded border border-gray-100/20' %} 
+                </div>
+                
+                <div class="mt-5">
+                    <p>Password</p>
+                    {% render_field form.password  class='bg-transparent p-2 w-full  focus:outline-none rounded border border-gray-100/20' %} 
+                </div>
+                
+               
+                 
+                
+
+                <div class="mt-10">
+                    <button  class="bg-cyan-500 py-2 px-4 rounded text-gray-700"> <i class="fas fa-lock"></i> Login</button>
+                </div>
+
+                <div class="mt-10 text-center">
+                    <p>Have you signed up?</p>
+                    <a href="{% url 'loginPage' %}">Login</a>
+                </div>
+            </div>
+        </div>
     </form>
 
     {% endif %}

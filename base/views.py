@@ -31,14 +31,15 @@ def loginPage(request):
 
 def registerPage(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
+        form = UserForm(request.POST)
+        print(request.POST.get('password'))
+        if  form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('home')
         else:
             messages.error(request,'an error accured, tryagain')
-    return render(request, 'base/login_register.html',{'form':UserCreationForm()})
+    return render(request, 'base/login_register.html',{'form':UserForm()})
 
 def room(request, id):
     room = Room.objects.get(id = int(id))
@@ -127,6 +128,7 @@ def profileEdit(request):
         if form.is_valid():
             form.save()
             return redirect('profile', id=request.user.id)
-
+        else:
+            messages.error(request,'error, try again')
     return render(request, 'base/editprofile.html', {"form":form})
 

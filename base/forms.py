@@ -1,12 +1,15 @@
-from django.forms import ModelForm
+from django import forms
 from .views import Room, User
 
-class RoomForm(ModelForm):
+class RoomForm(forms.ModelForm):
      class Meta:
         model = Room
         fields = ['name','description','topic']
 
-class UserForm(ModelForm):
+class UserForm(forms.ModelForm):
    class Meta:
       model = User
-      fields = ['username', 'email', 'bio', 'name', 'avatar']
+      fields = ['username', 'email', 'bio', 'name', 'avatar', 'password']
+      widgets = {
+      'password': forms.PasswordInput()
+         }
