@@ -1,9 +1,9 @@
 {% extends "main.html" %}
 {% block content  %}
 {% load widget_tweaks %}
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="h-screen flex items-center justify-center">
+        <div class="h-min-screen flex items-center justify-center">
             <div class="w-4/12 rounded-lg text-white mainColor overflow-hidden">
                 <div class="p-4 text-center uppercase boxColor font-bold text-white">
                    Edit Profile {{ request.user }}
@@ -17,6 +17,20 @@
                     <div class="mt-4">
                         <p>Email</p>
                         {% render_field form.email class='bg-transparent p-2 w-full  focus:outline-none rounded border border-gray-100/20' %}
+                    </div>
+                
+                    <div class="mt-4">
+                        <p>Name</p>
+                        {% render_field form.name class='bg-transparent p-2 w-full  focus:outline-none rounded border border-gray-100/20' %}
+                    </div>
+                    <div class="mt-4">
+                        <p>Avatar</p>
+                        {% render_field form.avatar class='bg-transparent p-2 w-full  focus:outline-none rounded border border-gray-100/20' %}
+                    </div>
+                
+                    <div class="mt-4">
+                        <p>Bio</p>
+                        {% render_field form.bio class='bg-transparent p-2 w-full  focus:outline-none rounded border border-gray-100/20' %}
                     </div>
     
                     <div class="mt-10">

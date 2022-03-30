@@ -14,7 +14,7 @@
             <a href="{% url 'loginPage' %}"> <i class="fas fa-user"></i> Login</a>
            {% else %}
             <button onclick="modalFun()" class="flex focus:outline-none font-bold items-center space-x-3">
-                <img style="background-image:url('https://st.depositphotos.com/1371851/1256/i/600/depositphotos_12560182-stock-photo-handsome-man-with-eyeglasses.jpg')" class="w-10 h-10 coverImg rounded-full" alt="">
+                <img style="background-image:url('{{ request.user.avatar.url }}')" class="w-10 h-10 coverImg rounded-full" alt="">
                 <p class="text-sm">{{ request.user }}</p>
             </button>
             <div class="w-40 py-5 shadow-xl hidden absolute top-14 p-2 rounded text-center grid gap-y-3 color text-xs" id="modal">

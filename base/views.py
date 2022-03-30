@@ -117,15 +117,14 @@ def profile(request, id):
     topic = Topic.objects.all()
     return render(request,'base/profile.html',{'user':user, 'content':room, 'activity':activity, 'topic':topic})
 
-
+@login_required(login_url='login')
 def profileEdit(request):
     user = request.user
     form = UserForm(instance=user)
 
     if request.method == "POST":
-        form = UserForm(request.POST, instance=user)
+        form = UserForm(request.POST,request.FILES, instance=user)
         if form.is_valid():
-            print(12)
             form.save()
             return redirect('profile', id=request.user.id)
 
