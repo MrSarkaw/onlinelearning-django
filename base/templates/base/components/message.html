@@ -8,7 +8,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <div class="flex items-center space-x-3">
-                            <img style="background-image:url('https://st.depositphotos.com/1371851/1256/i/600/depositphotos_12560182-stock-photo-handsome-man-with-eyeglasses.jpg')" class="w-8 h-8 coverImg rounded-full" alt="">
+                            <img style="background-image:url('{{ message.user.avatar.url }}')" class="w-8 h-8 coverImg rounded-full" alt="">
                             <div class="text-sm">
                                 <p>
                                     <a href="{% url 'profile' message.user.id %}">
